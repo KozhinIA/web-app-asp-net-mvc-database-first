@@ -34,32 +34,10 @@ namespace WebAppAspNetMvcDatabaseFirst.Controllers
                 return View(model);
 
             var db = new WebAppAspNetMvcDatabaseFirstEntities();
-           
-
-            //if (model.BookImageFile != null)
-            //{
-            //    var data = new byte[model.BookImageFile.ContentLength];
-            //    model.BookImageFile.InputStream.Read(data, 0, model.BookImageFile.ContentLength);
-
-            //    model.BookImage = new BookImage()
-            //    {
-            //        Guid = Guid.NewGuid(),
-            //        DateChanged = DateTime.Now,
-            //        Data = data,
-            //        ContentType = model.BookImageFile.ContentType,
-            //        FileName = model.BookImageFile.FileName
-            //    };
-            //}
-
-            //if(model.AuthorIds != null && model.AuthorIds.Any())
-            //{
-            //    var author = db.Authors.Where(s => model.AuthorIds.Contains(s.Id)).ToList();
-            //    model.Authors = author;
-            //}
-
             var book = new Book();
             book.CreateAt = DateTime.Now;
             MappingBook(model, book, db);
+
             db.Books.Add(book);
             db.SaveChanges();
 
@@ -143,8 +121,6 @@ namespace WebAppAspNetMvcDatabaseFirst.Controllers
 
             if (sourse.AuthorIds != null && sourse.AuthorIds.Any())
                 destination.Authors = db.Authors.Where(s => sourse.AuthorIds.Contains(s.Id)).ToList();
-
-
 
             if (sourse.BookImageFile != null)
             {
